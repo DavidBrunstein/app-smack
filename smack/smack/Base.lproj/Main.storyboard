@@ -33,7 +33,7 @@
         <scene sceneID="Qg2-N0-wwu">
             <objects>
                 <viewController id="9AS-um-Ue4" customClass="ChannelVC" customModule="smack" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZjJ-OW-LbM" customClass="chan">
+                    <view key="view" contentMode="scaleToFill" id="ZjJ-OW-LbM" customClass="GradientView" customModule="smack" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crV-Qo-Sco" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-20" y="-46"/>
+            <point key="canvasLocation" x="-20" y="-46.326836581709152"/>
         </scene>
         <!--ChatVC-->
         <scene sceneID="1jW-TT-0Tt">
