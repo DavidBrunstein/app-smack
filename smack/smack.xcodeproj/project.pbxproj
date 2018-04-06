@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		501DB79F2076FE350061C2B0 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DB79E2076FE350061C2B0 /* LoginVC.swift */; };
+		501DB7A1207701560061C2B0 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501DB7A0207701560061C2B0 /* CreateAccountVC.swift */; };
 		502A15461FF4671E00EF9FB6 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 502A15451FF4671E00EF9FB6 /* SWRevealViewController.m */; };
 		502A154B1FF46A7E00EF9FB6 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A154A1FF46A7E00EF9FB6 /* ChatVC.swift */; };
 		502A154D1FF46A9000EF9FB6 /* ChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A154C1FF46A9000EF9FB6 /* ChannelVC.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		501DB79E2076FE350061C2B0 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		501DB7A0207701560061C2B0 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		502A15431FF4671C00EF9FB6 /* smack-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "smack-Bridging-Header.h"; sourceTree = "<group>"; };
 		502A15441FF4671D00EF9FB6 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		502A15451FF4671E00EF9FB6 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				502A154A1FF46A7E00EF9FB6 /* ChatVC.swift */,
 				502A154C1FF46A9000EF9FB6 /* ChannelVC.swift */,
 				501DB79E2076FE350061C2B0 /* LoginVC.swift */,
+				501DB7A0207701560061C2B0 /* CreateAccountVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			files = (
 				502A154D1FF46A9000EF9FB6 /* ChannelVC.swift in Sources */,
 				502A154B1FF46A7E00EF9FB6 /* ChatVC.swift in Sources */,
+				501DB7A1207701560061C2B0 /* CreateAccountVC.swift in Sources */,
 				501DB79F2076FE350061C2B0 /* LoginVC.swift in Sources */,
 				502A154F1FF4748500EF9FB6 /* GradientView.swift in Sources */,
 				5088DA541FF424DD001DB80C /* AppDelegate.swift in Sources */,
