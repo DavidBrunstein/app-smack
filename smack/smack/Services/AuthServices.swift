@@ -76,6 +76,42 @@ class AuthServices {
             }
     }
     
+    func createUser(userName: String, userEmail: String, avatarImageName: String, backgroundColor: String, completion: @escaping CompletionHander) {
+        
+        let lowerCaseEmail = userEmail.lowercased()
+        
+        let header = [
+            "Authorization" : "Bearer \(self.authToken)",
+            "Content-type": "application/json; charset=utf-8"
+        ]
+        let body: [String: Any] = [
+            "name" : userName,
+            "email": lowerCaseEmail,
+            "avatarName" : avatarImageName,
+            "avatarColor" : backgroundColor
+        ]
+        
+        Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            
+            if response.result.error == nil {
+                guard let data = response.data else { return }
+                let jsonData = JSON(data)
+                let id = jsonData["_id"].stringValue
+                let backgroundColor = jsonData["avatarColor"].stringValue
+                let avatarImageName = jsonData["avatarName"].stringValue
+                let userEmail = jsonData["email"].stringValue
+                let userName = jsonData["name"].stringValue
+                
+                UserDataService.instance.setUserData(id: id, backgroundColor: backgroundColor, avatarImageName: avatarImageName, userEmail: userEmail, userName: userName)
+                completion(true)
+            } else {
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+        }
+
+    }
+    
     
     // User defaults persisted between app runs
     let defaults = UserDefaults.standard

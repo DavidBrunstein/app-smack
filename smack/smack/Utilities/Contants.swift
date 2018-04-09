@@ -26,6 +26,8 @@ let USER_EMAIL_KEY = "userEmail"
 let BASE_URL: String = "https://chatforchatters.herokuapp.com/v1/"
 let URL_ACCOUNT_REGISTER: String = "\(BASE_URL)account/register"
 let URL_LOGIN: String = "\(BASE_URL)account/login"
+let URL_USER_ADD: String = "\(BASE_URL)user/add"
+
 
 let API_HEADER = [
     "Content-type": "application/json; charset=utf-8"
