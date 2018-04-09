@@ -161,7 +161,7 @@
                                     <action selector="closeBtnPressed:" destination="ZYS-4l-rlH" eventType="touchUpInside" id="iyy-uf-oHa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKe-Ox-qdv">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKe-Ox-qdv" customClass="SmackButton" customModule="smack" customModuleProvider="target">
                                 <rect key="frame" x="62.5" y="294" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -268,7 +268,6 @@
                                 <rect key="frame" x="331" y="30" width="28" height="28"/>
                                 <state key="normal" image="closeButton"/>
                                 <connections>
-                                    <action selector="closeBtnPressed:" destination="ZYS-4l-rlH" eventType="touchUpInside" id="SVW-aF-r7B"/>
                                     <action selector="closeBtnPressed:" destination="sxd-3P-WId" eventType="touchUpInside" id="r0U-ra-Yec"/>
                                 </connections>
                             </button>
@@ -345,7 +344,7 @@
                                     <color key="titleColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="createAccountBtnPressed:" destination="ZYS-4l-rlH" eventType="touchUpInside" id="WDA-YB-PHr"/>
+                                    <action selector="chooseAvatarBtnPressed:" destination="sxd-3P-WId" eventType="touchUpInside" id="bc4-0H-vHd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrH-xk-w0z">
@@ -359,10 +358,10 @@
                                     <color key="titleColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="createAccountBtnPressed:" destination="ZYS-4l-rlH" eventType="touchUpInside" id="Lvr-wg-wIX"/>
+                                    <action selector="generateBackgroundColorBtnPressed:" destination="sxd-3P-WId" eventType="touchUpInside" id="n36-iE-dSY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejQ-OD-2ev">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejQ-OD-2ev" customClass="SmackButton" customModule="smack" customModuleProvider="target">
                                 <rect key="frame" x="62" y="597" width="250" height="50"/>
                                 <color key="backgroundColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -373,6 +372,9 @@
                                 <state key="normal" title="Create Account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="createAccountBtnPressed:" destination="sxd-3P-WId" eventType="touchUpInside" id="ayA-dT-VmH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -396,6 +398,10 @@
                         <viewLayoutGuide key="safeArea" id="4jF-Q6-5EF"/>
                     </view>
                     <connections>
+                        <outlet property="emailTxt" destination="1V0-jL-hIc" id="CwU-4e-T2E"/>
+                        <outlet property="passwordTxt" destination="7lv-se-QhX" id="1aw-hs-9Oq"/>
+                        <outlet property="profileDefaultImg" destination="eyj-vK-IWH" id="698-Gj-f0e"/>
+                        <outlet property="userNameTxt" destination="brF-dk-ykG" id="QIt-qN-8E4"/>
                         <segue destination="CIg-8G-F0D" kind="unwind" identifier="unwindToChannel" unwindAction="prepareForUnwindWithSegue:" id="Lou-ZO-kGj"/>
                     </connections>
                 </viewController>
