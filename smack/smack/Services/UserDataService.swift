@@ -32,4 +32,33 @@ class UserDataService {
         self.avatarImageName = avatarImageName
     }
     
+    func stringToUIColor(colorComponents: String) -> UIColor {
+        
+        let defaultColor = UIColor.lightGray
+        
+        let colorScanner = Scanner(string: colorComponents)
+        let skipped = CharacterSet(charactersIn: "[], ")
+        let separator = CharacterSet(charactersIn: ",")
+        colorScanner.charactersToBeSkipped = skipped
+        
+        var red, green, blue, alpha : NSString?
+        colorScanner.scanUpToCharacters(from: separator, into: &red)
+        colorScanner.scanUpToCharacters(from: separator, into: &green)
+        colorScanner.scanUpToCharacters(from: separator, into: &blue)
+        colorScanner.scanUpToCharacters(from: separator, into: &alpha)
+
+        guard let redUnwrapped = red else { return defaultColor }
+        guard let greenUnwrapped = green else { return defaultColor }
+        guard let blueUnwrapped = blue else { return defaultColor }
+        guard let alphaUnwrapped = alpha else { return defaultColor }
+        
+        let redFloat = CGFloat(redUnwrapped.doubleValue)
+        let greenFloat = CGFloat(greenUnwrapped.doubleValue)
+        let blueFloat = CGFloat(blueUnwrapped.doubleValue)
+        let alphaFloat = CGFloat(alphaUnwrapped.doubleValue)
+
+        let newUIColor = UIColor(red: redFloat, green: greenFloat, blue: blueFloat, alpha: alphaFloat)
+        return newUIColor
+    }
+    
 }
