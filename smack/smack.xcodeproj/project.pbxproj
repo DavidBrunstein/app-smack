@@ -18,6 +18,7 @@
 		503108F4207BFA8F000CE049 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503108F3207BFA8F000CE049 /* UserDataService.swift */; };
 		503AC45C207D05DD00841E14 /* AvatarPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503AC45B207D05DD00841E14 /* AvatarPickerVC.swift */; };
 		5041040F1FF7182100C12C3A /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5041040E1FF7182100C12C3A /* Contants.swift */; };
+		5051041F207EA45A00B363AC /* SmackCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051041E207EA45A00B363AC /* SmackCircleImage.swift */; };
 		5088DA541FF424DD001DB80C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5088DA531FF424DD001DB80C /* AppDelegate.swift */; };
 		5088DA591FF424DD001DB80C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5088DA571FF424DD001DB80C /* Main.storyboard */; };
 		5088DA5B1FF424DD001DB80C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5088DA5A1FF424DD001DB80C /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		503108F3207BFA8F000CE049 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		503AC45B207D05DD00841E14 /* AvatarPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerVC.swift; sourceTree = "<group>"; };
 		5041040E1FF7182100C12C3A /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		5051041E207EA45A00B363AC /* SmackCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmackCircleImage.swift; sourceTree = "<group>"; };
 		5088DA501FF424DD001DB80C /* smack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5088DA531FF424DD001DB80C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5088DA581FF424DD001DB80C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				502A154E1FF4748500EF9FB6 /* GradientView.swift */,
 				503108F1207BEBEB000CE049 /* SmackButton.swift */,
 				50D75EB7207D54EE008CE00C /* AvatarCell.swift */,
+				5051041E207EA45A00B363AC /* SmackCircleImage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				503108F0207BC017000CE049 /* AuthServices.swift in Sources */,
 				502A15461FF4671E00EF9FB6 /* SWRevealViewController.m in Sources */,
 				5041040F1FF7182100C12C3A /* Contants.swift in Sources */,
+				5051041F207EA45A00B363AC /* SmackCircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
