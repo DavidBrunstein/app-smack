@@ -61,4 +61,15 @@ class UserDataService {
         return newUIColor
     }
     
+    func logoutUser() {
+        self.id = ""
+        self.backgroundColor = ""
+        self.avatarImageName = ""
+        self.userEmail = ""
+        self.userName = ""
+        AuthServices.instance.isLoggedIn = false
+        AuthServices.instance.userEmail = ""
+        AuthServices.instance.authToken = ""
+    }
+    
 }
