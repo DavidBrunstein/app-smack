@@ -23,6 +23,13 @@ class CreateAccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDataService.instance.avatarImageName != "" {
+            profileDefaultImg.image = UIImage(named: UserDataService.instance.avatarImageName)
+            avatarImageName = UserDataService.instance.avatarImageName
+        }
+    }
 
     @IBAction func chooseAvatarBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_AVATAR_PICKER, sender: nil)
