@@ -173,6 +173,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginBtnPressed:" destination="ZYS-4l-rlH" eventType="touchUpInside" id="kOv-y3-Hag"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suF-LB-82M">
                                 <rect key="frame" x="62.5" y="344" width="250" height="30"/>
@@ -227,6 +230,10 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="oOh-8r-nFO">
+                                <rect key="frame" x="169" y="215" width="37" height="37"/>
+                                <color key="color" red="0.25882352939999997" green="0.3294117647" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -239,11 +246,16 @@
                             <constraint firstItem="KID-OS-kCc" firstAttribute="trailing" secondItem="Lb7-Dk-EIv" secondAttribute="trailing" constant="10" id="Sr3-Uz-qpj"/>
                             <constraint firstItem="UKe-Ox-qdv" firstAttribute="centerX" secondItem="d9X-pJ-ZSB" secondAttribute="centerX" id="Xvv-GO-ImB"/>
                             <constraint firstItem="Lb7-Dk-EIv" firstAttribute="top" secondItem="KID-OS-kCc" secondAttribute="top" constant="8" id="gx1-Ji-pRT"/>
+                            <constraint firstItem="oOh-8r-nFO" firstAttribute="centerY" secondItem="d9X-pJ-ZSB" secondAttribute="centerY" constant="-100" id="h5Z-v0-dsO"/>
+                            <constraint firstItem="oOh-8r-nFO" firstAttribute="centerX" secondItem="d9X-pJ-ZSB" secondAttribute="centerX" id="nTj-4k-p4n"/>
                             <constraint firstItem="46z-EK-6dY" firstAttribute="centerX" secondItem="d9X-pJ-ZSB" secondAttribute="centerX" id="qbQ-Un-8dH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KID-OS-kCc"/>
                     </view>
                     <connections>
+                        <outlet property="loginSpinner" destination="oOh-8r-nFO" id="RgF-Oo-xa1"/>
+                        <outlet property="passwordTxt" destination="pDy-79-sH8" id="kqs-Vo-CQP"/>
+                        <outlet property="userNameTxt" destination="jpe-2B-GRe" id="H3V-0a-KK1"/>
                         <segue destination="sxd-3P-WId" kind="show" identifier="toCreateAccount" id="a9p-2P-ApU"/>
                     </connections>
                 </viewController>

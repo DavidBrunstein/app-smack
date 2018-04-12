@@ -20,7 +20,6 @@ class AuthServices {
     func registerUser (email: String, password: String, completion: @escaping CompletionHander) {
         
         let lowerCaseEmail = email.lowercased()
-        
 
         let body: [String: Any] = [
         "email": lowerCaseEmail,
@@ -80,10 +79,6 @@ class AuthServices {
         
         let lowerCaseEmail = userEmail.lowercased()
         
-        let header = [
-            "Authorization" : "Bearer \(self.authToken)",
-            "Content-type": "application/json; charset=utf-8"
-        ]
         let body: [String: Any] = [
             "name" : userName,
             "email": lowerCaseEmail,
@@ -91,18 +86,11 @@ class AuthServices {
             "avatarColor" : backgroundColor
         ]
         
-        Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+        Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: API_BEARER_HEADER).responseJSON { (response) in
             
             if response.result.error == nil {
                 guard let data = response.data else { return }
-                let jsonData = JSON(data)
-                let id = jsonData["_id"].stringValue
-                let backgroundColor = jsonData["avatarColor"].stringValue
-                let avatarImageName = jsonData["avatarName"].stringValue
-                let userEmail = jsonData["email"].stringValue
-                let userName = jsonData["name"].stringValue
-                
-                UserDataService.instance.setUserData(id: id, backgroundColor: backgroundColor, avatarImageName: avatarImageName, userEmail: userEmail, userName: userName)
+                self.setUserInfo(data)
                 completion(true)
             } else {
                 completion(false)
@@ -112,7 +100,34 @@ class AuthServices {
 
     }
     
+    func findUserByEmail(completion: @escaping CompletionHander) {
+        
+        Alamofire.request("\(URL_FIND_USER_BY_EMAIL)\(userEmail)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: API_BEARER_HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.data else { return }
+                self.setUserInfo(data)
+                completion(true)
+            } else {
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+
+        }
+        
+    }
     
+    fileprivate func setUserInfo(_ data: Data) {
+        let jsonData = JSON(data)
+        let id = jsonData["_id"].stringValue
+        let backgroundColor = jsonData["avatarColor"].stringValue
+        let avatarImageName = jsonData["avatarName"].stringValue
+        let userEmail = jsonData["email"].stringValue
+        let userName = jsonData["name"].stringValue
+        
+        UserDataService.instance.setUserData(id: id, backgroundColor: backgroundColor, avatarImageName: avatarImageName, userEmail: userEmail, userName: userName)
+    }
+    
+
     // User defaults persisted between app runs
     let defaults = UserDefaults.standard
     

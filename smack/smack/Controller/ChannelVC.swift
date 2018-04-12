@@ -23,6 +23,10 @@ class ChannelVC: UIViewController {
         // Listen to the notification center
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIFICATION_USER_DATA_DID_CHANGE, object: nil)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupUserInfo()
+    }
 
     @IBAction func loginBtnPressed(_ sender: Any) {
         if AuthServices.instance.isLoggedIn {
@@ -40,7 +44,10 @@ class ChannelVC: UIViewController {
     @objc func userDataDidChange(_ notif: Notification) {
         // This function is called when the notification is broadcasted (posted)
         // We are going to update the UI
-        
+        setupUserInfo()
+     }
+    
+    func setupUserInfo() {
         if AuthServices.instance.isLoggedIn {
             loginBtn.setTitle(UserDataService.instance.userName, for: .normal)
             userProfileAvatarImg.image = UIImage(named: UserDataService.instance.avatarImageName)

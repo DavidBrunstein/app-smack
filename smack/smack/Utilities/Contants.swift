@@ -34,8 +34,14 @@ let BASE_URL: String = "https://chatforchatters.herokuapp.com/v1/"
 let URL_ACCOUNT_REGISTER: String = "\(BASE_URL)account/register"
 let URL_LOGIN: String = "\(BASE_URL)account/login"
 let URL_USER_ADD: String = "\(BASE_URL)user/add"
+let URL_FIND_USER_BY_EMAIL: String = "\(BASE_URL)user/byEmail/"
 
 
 let API_HEADER = [
     "Content-type": "application/json; charset=utf-8"
 ]
+let API_BEARER_HEADER = [
+    "Authorization" : "Bearer \(AuthServices.instance.authToken)",
+    "Content-type": "application/json; charset=utf-8"
+]
+
