@@ -8,15 +8,19 @@
 
 import UIKit
 
-class ChannelVC: UIViewController {
+class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // Outlets
     @IBOutlet weak var loginBtn: UIButton!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {}
     @IBOutlet weak var userProfileAvatarImg: SmackCircleImage!
+    @IBOutlet weak var channelsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        channelsTableView.delegate = self
+        channelsTableView.dataSource = self
 
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         
@@ -28,6 +32,11 @@ class ChannelVC: UIViewController {
         setupUserInfo()
     }
 
+    @IBAction func createChannelBtnPressed(_ sender: Any) {
+        let createChannel = CreateChannelVC()
+        createChannel.modalPresentationStyle = .custom
+        present(createChannel, animated: true, completion: nil)
+    }
     @IBAction func loginBtnPressed(_ sender: Any) {
         if AuthServices.instance.isLoggedIn {
             // Show the profile page (XIB file)
@@ -58,4 +67,22 @@ class ChannelVC: UIViewController {
             userProfileAvatarImg.backgroundColor = UIColor.clear
         }
     }
+    
+    // Channels Table View
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = channelsTableView.dequeueReusableCell(withIdentifier: "channelCell", for: indexPath ) as? ChannelCell {
+            let channel = MessageService.instance.channels[indexPath.row]
+            cell.configureCell(channel: channel)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return MessageService.instance.channels.count
+    }
+    
 }

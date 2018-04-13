@@ -71,7 +71,7 @@
                                 <rect key="frame" x="10" y="131" width="355" height="421"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="54" id="O3i-pA-eHL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChannelCell" rowHeight="54" id="O3i-pA-eHL" customClass="ChannelCell" customModule="smack" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="355" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O3i-pA-eHL" id="IEi-XO-QNV">
@@ -92,12 +92,18 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="channelName" destination="FJi-Pd-SjY" id="ncJ-ib-nAg"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WI-5p-VaR">
                                 <rect key="frame" x="281" y="89" width="22" height="22"/>
                                 <state key="normal" image="addChannelButton"/>
+                                <connections>
+                                    <action selector="createChannelBtnPressed:" destination="9AS-um-Ue4" eventType="touchUpInside" id="8OH-UM-VE2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -120,6 +126,7 @@
                         <viewLayoutGuide key="safeArea" id="4hr-JV-woz"/>
                     </view>
                     <connections>
+                        <outlet property="channelsTableView" destination="Cqp-6T-hOM" id="fXw-Cc-jOS"/>
                         <outlet property="loginBtn" destination="SY9-qu-Nly" id="3aH-ik-M16"/>
                         <outlet property="userProfileAvatarImg" destination="IuM-Gc-PLo" id="kPN-0h-ZjX"/>
                         <segue destination="ZYS-4l-rlH" kind="show" identifier="toLogin" id="AFc-pI-FY6"/>
