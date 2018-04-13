@@ -15,12 +15,17 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var userNameLbl: UILabel!
     @IBOutlet weak var userEmailLbl: UILabel!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var profileView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
      }
+    override func viewDidAppear(_ animated: Bool) {
+        setupView()
+    }
+    
 
     @IBAction func logoutBtnPressed(_ sender: Any) {
         UserDataService.instance.logoutUser()
@@ -44,6 +49,8 @@ class ProfileVC: UIViewController {
         let closeTouch = UITapGestureRecognizer(target: self, action: #selector(ProfileVC.closeTap(_:)))
         backgroundView.addGestureRecognizer(closeTouch)
         
+        profileView.layer.cornerRadius = 5.0
+        profileView.clipsToBounds = true
     }
     
     @objc func closeTap(_ recognizer: UITapGestureRecognizer) {
