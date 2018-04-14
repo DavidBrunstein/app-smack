@@ -23,6 +23,9 @@ let smackPurplePlaceholder = #colorLiteral(red: 0.3254901961, green: 0.419607843
 
 // Notification constants
 let NOTIFICATION_USER_DATA_DID_CHANGE = Notification.Name("notificationUserDataChanged")
+let NOTIFICATION_CHANNELS_LOADED = Notification.Name("channelsLoaded")
+let NOTIFICATION_CHANNEL_SELECTED = Notification.Name("channelSelected")
+
 
 // Users default
 let LOGGED_IN_KEY = "loggedIn"

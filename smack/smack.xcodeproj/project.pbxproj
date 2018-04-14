@@ -26,6 +26,7 @@
 		5051042A20815B5300B363AC /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051042920815B5300B363AC /* ChannelCell.swift */; };
 		5051042D2081637200B363AC /* CreateChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051042B2081637200B363AC /* CreateChannelVC.swift */; };
 		5051042E2081637200B363AC /* CreateChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5051042C2081637200B363AC /* CreateChannelVC.xib */; };
+		505104302081701400B363AC /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051042F2081701400B363AC /* SocketService.swift */; };
 		5088DA541FF424DD001DB80C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5088DA531FF424DD001DB80C /* AppDelegate.swift */; };
 		5088DA591FF424DD001DB80C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5088DA571FF424DD001DB80C /* Main.storyboard */; };
 		5088DA5B1FF424DD001DB80C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5088DA5A1FF424DD001DB80C /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		5051042920815B5300B363AC /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		5051042B2081637200B363AC /* CreateChannelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelVC.swift; sourceTree = "<group>"; };
 		5051042C2081637200B363AC /* CreateChannelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateChannelVC.xib; sourceTree = "<group>"; };
+		5051042F2081701400B363AC /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		5088DA501FF424DD001DB80C /* smack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5088DA531FF424DD001DB80C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5088DA581FF424DD001DB80C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				503108EF207BC017000CE049 /* AuthServices.swift */,
 				503108F3207BFA8F000CE049 /* UserDataService.swift */,
 				505104252081554400B363AC /* MessageService.swift */,
+				5051042F2081701400B363AC /* SocketService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				505104302081701400B363AC /* SocketService.swift in Sources */,
 				502A154D1FF46A9000EF9FB6 /* ChannelVC.swift in Sources */,
 				5051042A20815B5300B363AC /* ChannelCell.swift in Sources */,
 				50510422207EBF1300B363AC /* ProfileVC.swift in Sources */,

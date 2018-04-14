@@ -24,8 +24,18 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         
-        // Listen to the notification center
+        // Listen to the notification user data changes
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIFICATION_USER_DATA_DID_CHANGE, object: nil)
+
+        // Listen to the notification the channels are loaded
+        NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.channelsLoaded(_:)), name: NOTIFICATION_CHANNELS_LOADED, object: nil)
+
+        // Get any new channel from the server
+        SocketService.instance.getChannel { (success) in
+            if success {
+                self.channelsTableView.reloadData()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,9 +43,12 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     @IBAction func createChannelBtnPressed(_ sender: Any) {
-        let createChannel = CreateChannelVC()
-        createChannel.modalPresentationStyle = .custom
-        present(createChannel, animated: true, completion: nil)
+        // Check if we are logged before presenting the create channel modal page
+        if AuthServices.instance.isLoggedIn {
+            let createChannel = CreateChannelVC()
+            createChannel.modalPresentationStyle = .custom
+            present(createChannel, animated: true, completion: nil)
+        }
     }
     @IBAction func loginBtnPressed(_ sender: Any) {
         if AuthServices.instance.isLoggedIn {
@@ -55,7 +68,6 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // We are going to update the UI
         setupUserInfo()
      }
-    
     func setupUserInfo() {
         if AuthServices.instance.isLoggedIn {
             loginBtn.setTitle(UserDataService.instance.userName, for: .normal)
@@ -65,12 +77,19 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             loginBtn.setTitle("Login", for: .normal)
             userProfileAvatarImg.image = UIImage(named: "menuProfileIcon")
             userProfileAvatarImg.backgroundColor = UIColor.clear
+            channelsTableView.reloadData()
         }
+    }
+    
+    @objc func channelsLoaded(_ notif: Notification) {
+        // This function is called when the notification is broadcasted (posted)
+        // We are going to update the UI
+        channelsTableView.reloadData()
     }
     
     // Channels Table View
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = channelsTableView.dequeueReusableCell(withIdentifier: "channelCell", for: indexPath ) as? ChannelCell {
+        if let cell = channelsTableView.dequeueReusableCell(withIdentifier: "ChannelCell", for: indexPath ) as? ChannelCell {
             let channel = MessageService.instance.channels[indexPath.row]
             cell.configureCell(channel: channel)
             return cell
@@ -83,6 +102,23 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MessageService.instance.channels.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Save the selected channel into the MessageService variable when we select a row
+        // Then send out the nofitification. The ChatVC will be notified the channel has been selected
+        // Then we dismiss the menu to go back to the ChatVC page
+        
+        let channel = MessageService.instance.channels[indexPath.row]
+        MessageService.instance.selectedChannel = channel
+        
+        // Send the notification out
+        NotificationCenter.default.post(name: NOTIFICATION_CHANNEL_SELECTED, object: nil)
+        
+        // Reveeal Toggle is to switch back and forth the menu
+        self.revealViewController().rightRevealToggle(animated: true)
+
     }
     
 }
