@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias CompletionHander = (_ Success: Bool) -> ()
+typealias CompletionHandler = (_ Success: Bool) -> ()
 
 
 // Segues
@@ -39,7 +39,7 @@ let URL_LOGIN: String = "\(BASE_URL)account/login"
 let URL_USER_ADD: String = "\(BASE_URL)user/add"
 let URL_FIND_USER_BY_EMAIL: String = "\(BASE_URL)user/byEmail/"
 let URL_GET_CHANNELS: String = "\(BASE_URL)channel"
-
+let URL_GET_MESSAGES: String = "\(BASE_URL)message/byChannel"
 
 let API_HEADER = [
     "Content-type": "application/json; charset=utf-8"

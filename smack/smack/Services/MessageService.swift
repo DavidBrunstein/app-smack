@@ -17,8 +17,9 @@ class MessageService {
     
     var channels = [Channel]()
     var selectedChannel: Channel?
+    var messages = [Message]()
     
-    func findAllChannels(completion: @escaping CompletionHander) {
+    func findAllChannels(completion: @escaping CompletionHandler) {
         
         Alamofire.request(URL_GET_CHANNELS, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: API_BEARER_HEADER).responseJSON { (response) in
             
@@ -48,8 +49,46 @@ class MessageService {
         }
     }
     
+    func findAllMessagesForChannel(channelId: String, completion: @escaping CompletionHandler) {
+    
+        Alamofire.request("\(URL_GET_MESSAGES)\(channelId)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: API_BEARER_HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                self.clearMessages()
+                guard let data = response.data else { return }
+                if let jsonArray = JSON(data).array {
+                    for jsonItem in jsonArray {
+                        let messageText = jsonItem["messageBody"].stringValue
+                        let userName  = jsonItem["userName"].stringValue
+                        let channelId = jsonItem["channelId"].stringValue
+                        let userAvatar = jsonItem["userAvatar"].stringValue
+                        let userAvatarColor = jsonItem["userAvatarColor"].stringValue
+                        let messageId = jsonItem["_id"].stringValue
+                        let timeStamp = jsonItem["timeStamp"].stringValue
+                        
+                        let message = Message(messageText: messageText, userName: userName, channelId: channelId,
+                                              userAvatar: userAvatar, userAvatarColor: userAvatarColor, messageId: messageId, timeStamp: timeStamp)
+                        self.messages.append(message)
+                    }
+                    
+                    // Post the notification that the messages for the selected channel were loaded
+                    NotificationCenter.default.post(name: NOTIFICATION_CHANNELS_LOADED, object: nil)
+                    
+                    completion(true)
+                }
+                print(self.messages)
+                
+            } else {
+                debugPrint(response.result.error as Any)
+                completion(false)
+            }
+        }
+    }
+    
     func clearChannels() {
         channels.removeAll()
+    }
+    func clearMessages() {
+        messages.removeAll()
     }
     
     

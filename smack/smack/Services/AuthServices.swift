@@ -17,7 +17,7 @@ class AuthServices {
     // Singleton
     static let instance = AuthServices()
     
-    func registerUser (email: String, password: String, completion: @escaping CompletionHander) {
+    func registerUser (email: String, password: String, completion: @escaping CompletionHandler) {
         
         let lowerCaseEmail = email.lowercased()
 
@@ -37,7 +37,7 @@ class AuthServices {
         }
     }
     
-    func loginUser (email: String, password: String, completion: @escaping CompletionHander) {
+    func loginUser (email: String, password: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         
         let body: [String: Any] = [
@@ -75,7 +75,7 @@ class AuthServices {
             }
     }
     
-    func createUser(userName: String, userEmail: String, avatarImageName: String, backgroundColor: String, completion: @escaping CompletionHander) {
+    func createUser(userName: String, userEmail: String, avatarImageName: String, backgroundColor: String, completion: @escaping CompletionHandler) {
         
         let lowerCaseEmail = userEmail.lowercased()
         
@@ -100,7 +100,7 @@ class AuthServices {
 
     }
     
-    func findUserByEmail(completion: @escaping CompletionHander) {
+    func findUserByEmail(completion: @escaping CompletionHandler) {
         
         Alamofire.request("\(URL_FIND_USER_BY_EMAIL)\(userEmail)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: API_BEARER_HEADER).responseJSON { (response) in
             if response.result.error == nil {

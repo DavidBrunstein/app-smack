@@ -34,13 +34,13 @@ class SocketService: NSObject {
         socket.disconnect()
     }
     
-    func createChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHander) {
+    func createChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler) {
         // socketManager.defaultSocket.emit("newChannel", channelName, channelDescription)
         socket.emit("newChannel", channelName, channelDescription)
         completion(true)
     }
     
-    func getChannel(completion: @escaping CompletionHander) {
+    func getChannel(completion: @escaping CompletionHandler) {
         
 //        socketManager.defaultSocket.on("channelCreated") { (dataArray, ack) in
 //            guard let channelName = dataArray[0] as? String else { return }
