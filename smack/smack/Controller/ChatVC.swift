@@ -14,8 +14,17 @@ class ChatVC: UIViewController {
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var channelNameLbl: UILabel!
     
+    @IBOutlet weak var messageTxt: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // bindToKeyboard is an extension of UIView.
+        // It makes the view to scroll up when the keyboard appears from the bottom of the page
+        view.bindToKeyboard()
+        
+        // Adding a tap gesture so the view scrolls down to the original position when the keyboard is dismissed
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatVC.handleTap))
+        view.addGestureRecognizer(tap)
 
         menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -73,12 +82,36 @@ class ChatVC: UIViewController {
         self.getMessages()
     }
     
+
+    @IBAction func sendMessageBtnPressed(_ sender: Any) {
+        if AuthServices.instance.isLoggedIn {
+            guard let channelId = MessageService.instance.selectedChannel?.channelId else { return }
+            guard let messageText = messageTxt.text else { return }
+
+            SocketService.instance.addMessage(messageText: messageText, userId: UserDataService.instance.id, channelId: channelId) { (success) in
+                if success {
+                    // Blank the message text
+                    self.messageTxt.text = ""
+                    // dismiss the keyboard
+                    self.messageTxt.resignFirstResponder()
+                }
+            }
+        }
+        
+    }
     func getMessages() {
         guard let channelId = MessageService.instance.selectedChannel?.channelId else { return }
         MessageService.instance.findAllMessagesForChannel(channelId: channelId) { (success) in
             if success {
                 
+            } else {
+                print("error getting the messages!")
             }
         }
+    }
+    
+    @objc func handleTap() {
+        // Tapping outside the text field will end the editting and dismiss the keyboard
+        view.endEditing(true)
     }
 }
