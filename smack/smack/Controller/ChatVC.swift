@@ -16,6 +16,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var messagesTableView: UITableView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var messageTxt: UITextField!
+    @IBOutlet weak var typingUsersLbl: UILabel!
     
     // Variables
     var isTyping = false
@@ -55,6 +56,36 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     let endIndex: IndexPath = IndexPath(row: MessageService.instance.messages.count - 1, section: 0)
                     self.messagesTableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
                 }
+            }
+        }
+        
+        // Update the Typing... label text when other users are typing
+        SocketService.instance.getTypingUsers { (typingUsers) in
+            guard let channelId = MessageService.instance.selectedChannel?.channelId else { return }
+            var userNames = ""
+            var numberOfUsersTyping = 0
+            
+            for (typingUser, channel) in typingUsers {
+                // Check if the typing user is not us and the channel the user is typing on is the selected channel
+                if typingUser != UserDataService.instance.userName && channel == channelId {
+                    if userNames == "" {
+                        // First person
+                        userNames = typingUser
+                    } else {
+                        userNames = "\(userNames), \(typingUser)"
+                    }
+                    numberOfUsersTyping += 1
+                }
+            }
+            
+            if numberOfUsersTyping > 0 && AuthServices.instance.isLoggedIn {
+                var textWording = "is"
+                if numberOfUsersTyping > 1 {
+                    textWording = "are"
+                }
+                self.typingUsersLbl.text = "\(userNames) \(textWording) typing a message..."
+            } else {
+                self.typingUsersLbl.text = ""
             }
         }
         
@@ -112,9 +143,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if messageTxt.text == "" {
             isTyping = false
             sendBtn.isHidden = true
+            SocketService.instance.stopTyping()
         } else {
             if !isTyping {
                 sendBtn.isHidden = false
+                SocketService.instance.startTyping()
             }
             isTyping = true
         }
@@ -130,6 +163,9 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     self.messageTxt.text = ""
                     // dismiss the keyboard
                     self.messageTxt.resignFirstResponder()
+                    
+                    // Let all know the user stopped typing
+                    SocketService.instance.stopTyping()
                 }
             }
         }
