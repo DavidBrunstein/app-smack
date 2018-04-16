@@ -8,15 +8,21 @@
 
 import UIKit
 
-class ChatVC: UIViewController {
+class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // Outlets
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var channelNameLbl: UILabel!
+    @IBOutlet weak var messagesTableView: UITableView!
     
     @IBOutlet weak var messageTxt: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        messagesTableView.delegate = self
+        messagesTableView.dataSource = self
+        messagesTableView.estimatedRowHeight = 80
+        messagesTableView.rowHeight = UITableViewAutomaticDimension
         
         // bindToKeyboard is an extension of UIView.
         // It makes the view to scroll up when the keyboard appears from the bottom of the page
@@ -103,7 +109,8 @@ class ChatVC: UIViewController {
         guard let channelId = MessageService.instance.selectedChannel?.channelId else { return }
         MessageService.instance.findAllMessagesForChannel(channelId: channelId) { (success) in
             if success {
-                
+                // Once we retrieve the messages, let's reload the table data
+                self.messagesTableView.reloadData()
             } else {
                 print("error getting the messages!")
             }
@@ -113,5 +120,23 @@ class ChatVC: UIViewController {
     @objc func handleTap() {
         // Tapping outside the text field will end the editting and dismiss the keyboard
         view.endEditing(true)
+    }
+    
+    // Messages table view methods
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = messagesTableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as? MessageCell {
+            
+            let message = MessageService.instance.messages[indexPath.row]
+            cell.configureCell(message: message)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return MessageService.instance.messages.count
     }
 }

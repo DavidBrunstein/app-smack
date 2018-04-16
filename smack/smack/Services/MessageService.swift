@@ -73,9 +73,9 @@ class MessageService {
                     // Post the notification that the messages for the selected channel were loaded
                     NotificationCenter.default.post(name: NOTIFICATION_CHANNELS_LOADED, object: nil)
                     
+                    print(self.messages)
                     completion(true)
                 }
-                print(self.messages)
                 
             } else {
                 debugPrint(response.result.error as Any)
