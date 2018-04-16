@@ -14,8 +14,12 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var channelNameLbl: UILabel!
     @IBOutlet weak var messagesTableView: UITableView!
-    
+    @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var messageTxt: UITextField!
+    
+    // Variables
+    var isTyping = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +27,8 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         messagesTableView.dataSource = self
         messagesTableView.estimatedRowHeight = 80
         messagesTableView.rowHeight = UITableViewAutomaticDimension
+        
+        sendBtn.isHidden = true
         
         // bindToKeyboard is an extension of UIView.
         // It makes the view to scroll up when the keyboard appears from the bottom of the page
@@ -42,6 +48,16 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Observer the channel has been selected
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.channelHasBeenSelected(_:)), name: NOTIFICATION_CHANNEL_SELECTED, object: nil)
 
+        SocketService.instance.getMessage { (success) in
+            if success {
+                self.messagesTableView.reloadData()
+                if MessageService.instance.messages.count > 0 {
+                    let endIndex: IndexPath = IndexPath(row: MessageService.instance.messages.count - 1, section: 0)
+                    self.messagesTableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+                }
+            }
+        }
+        
         if AuthServices.instance.isLoggedIn {
             AuthServices.instance.findUserByEmail { (sucesss) in
                 // Send the notification out
@@ -57,6 +73,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         } else {
             channelNameLbl.text = "Please Log In"
+            messagesTableView.reloadData()
         }
     }
     func onLoginGetMessages() {
@@ -89,6 +106,19 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
 
+
+    
+    @IBAction func messageTxtEditing(_ sender: Any) {
+        if messageTxt.text == "" {
+            isTyping = false
+            sendBtn.isHidden = true
+        } else {
+            if !isTyping {
+                sendBtn.isHidden = false
+            }
+            isTyping = true
+        }
+    }
     @IBAction func sendMessageBtnPressed(_ sender: Any) {
         if AuthServices.instance.isLoggedIn {
             guard let channelId = MessageService.instance.selectedChannel?.channelId else { return }
