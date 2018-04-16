@@ -28,5 +28,20 @@ class MessageCell: UITableViewCell {
         userAvatarImg.backgroundColor = UserDataService.instance.stringToUIColor(colorComponents: message.userAvatarColor)
         
         // Time label requires date conversion
+        // We have to remove the millisec
+        guard let isoDate = message.timeStamp else { return }
+        let end = isoDate.index(isoDate.endIndex, offsetBy: -5)
+        let correctIsoDate = isoDate[..<end]
+        
+        let isoFormatter = ISO8601DateFormatter()
+        let timeStamp = isoFormatter.date(from: correctIsoDate.appending("Z"))
+        
+        let newFormatter = DateFormatter()
+        newFormatter.dateFormat = "MMM d, h:mm a"
+        if let finalDate = timeStamp {
+            let finalDate = newFormatter.string(from: finalDate)
+            self.timeStampLbl.text = finalDate
+        }
+        
     }
 }
