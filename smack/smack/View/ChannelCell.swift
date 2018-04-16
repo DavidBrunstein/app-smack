@@ -34,6 +34,14 @@ class ChannelCell: UITableViewCell {
     func configureCell(channel: Channel) {
         let name = channel.channelName
         channelName.text = "#\(name)"
+        
+        // Check if the channel has unread messages
+        channelName.font = UIFont(name: "HelveticaNeue-Regular", size: 17)
+        for channelId in MessageService.instance.unreadChannels {
+            if channelId == channel.channelId {
+                channelName.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+            }
+        }
     }
 
 }

@@ -36,6 +36,14 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.channelsTableView.reloadData()
             }
         }
+        
+        // Get new messages from other users
+        SocketService.instance.getMessage { (newMessage) in
+            if newMessage.channelId != MessageService.instance.selectedChannel?.channelId && AuthServices.instance.isLoggedIn {
+                MessageService.instance.unreadChannels.append(newMessage.channelId)
+                self.channelsTableView.reloadData()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,8 +111,6 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MessageService.instance.channels.count
     }
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Save the selected channel into the MessageService variable when we select a row
         // Then send out the nofitification. The ChatVC will be notified the channel has been selected
@@ -112,6 +118,15 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let channel = MessageService.instance.channels[indexPath.row]
         MessageService.instance.selectedChannel = channel
+        
+        // Check the unread messages in the channels
+        if MessageService.instance.unreadChannels.count > 0 {
+            MessageService.instance.unreadChannels = MessageService.instance.unreadChannels.filter{ $0 != channel.channelId }
+        }
+        let index:IndexPath = IndexPath(row: indexPath.row, section: 0)
+        channelsTableView.reloadRows(at: [index], with: .none)
+        channelsTableView.selectRow(at: index, animated: false, scrollPosition: .none)
+        
         
         // Send the notification out
         NotificationCenter.default.post(name: NOTIFICATION_CHANNEL_SELECTED, object: nil)

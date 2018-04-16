@@ -49,8 +49,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Observer the channel has been selected
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.channelHasBeenSelected(_:)), name: NOTIFICATION_CHANNEL_SELECTED, object: nil)
 
-        SocketService.instance.getMessage { (success) in
-            if success {
+
+        // Refactored
+        SocketService.instance.getMessage { (newMessage) in
+            if newMessage.channelId == MessageService.instance.selectedChannel?.channelId && AuthServices.instance.isLoggedIn {
+                MessageService.instance.messages.append(newMessage)
                 self.messagesTableView.reloadData()
                 if MessageService.instance.messages.count > 0 {
                     let endIndex: IndexPath = IndexPath(row: MessageService.instance.messages.count - 1, section: 0)
@@ -58,6 +61,17 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+        
+//        Before
+//        SocketService.instance.getMessage { (success) in
+//            if success {
+//                self.messagesTableView.reloadData()
+//                if MessageService.instance.messages.count > 0 {
+//                    let endIndex: IndexPath = IndexPath(row: MessageService.instance.messages.count - 1, section: 0)
+//                    self.messagesTableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
+//                }
+//            }
+//        }
         
         // Update the Typing... label text when other users are typing
         SocketService.instance.getTypingUsers { (typingUsers) in
