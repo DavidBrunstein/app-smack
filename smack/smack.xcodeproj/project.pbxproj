@@ -18,6 +18,7 @@
 		503108F4207BFA8F000CE049 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503108F3207BFA8F000CE049 /* UserDataService.swift */; };
 		503AC45C207D05DD00841E14 /* AvatarPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503AC45B207D05DD00841E14 /* AvatarPickerVC.swift */; };
 		5041040F1FF7182100C12C3A /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5041040E1FF7182100C12C3A /* Contants.swift */; };
+		5050A0842086DCA0008A014B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5050A0832086DC9F008A014B /* GoogleService-Info.plist */; };
 		5051041F207EA45A00B363AC /* SmackCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051041E207EA45A00B363AC /* SmackCircleImage.swift */; };
 		50510422207EBF1300B363AC /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50510420207EBF1300B363AC /* ProfileVC.swift */; };
 		50510423207EBF1300B363AC /* ProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50510421207EBF1300B363AC /* ProfileVC.xib */; };
@@ -52,6 +53,7 @@
 		503108F3207BFA8F000CE049 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		503AC45B207D05DD00841E14 /* AvatarPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerVC.swift; sourceTree = "<group>"; };
 		5041040E1FF7182100C12C3A /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		5050A0832086DC9F008A014B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "smack/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5051041E207EA45A00B363AC /* SmackCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmackCircleImage.swift; sourceTree = "<group>"; };
 		50510420207EBF1300B363AC /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		50510421207EBF1300B363AC /* ProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileVC.xib; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				5088DA5A1FF424DD001DB80C /* Assets.xcassets */,
 				5088DA5C1FF424DD001DB80C /* LaunchScreen.storyboard */,
 				5088DA5F1FF424DD001DB80C /* Info.plist */,
+				5050A0832086DC9F008A014B /* GoogleService-Info.plist */,
 			);
 			path = smack;
 			sourceTree = "<group>";
@@ -229,7 +232,7 @@
 				5088DA4D1FF424DD001DB80C /* Frameworks */,
 				5088DA4E1FF424DD001DB80C /* Resources */,
 				7D89B92EC019D63FEB6A1D8D /* [CP] Embed Pods Frameworks */,
-				554F3A883DF57F0549489FCC /* [CP] Copy Pods Resources */,
+				5050A0822086CA5D008A014B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -285,26 +288,25 @@
 				5051042E2081637200B363AC /* CreateChannelVC.xib in Resources */,
 				5088DA5B1FF424DD001DB80C /* Assets.xcassets in Resources */,
 				5088DA591FF424DD001DB80C /* Main.storyboard in Resources */,
+				5050A0842086DCA0008A014B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		554F3A883DF57F0549489FCC /* [CP] Copy Pods Resources */ = {
+		5050A0822086CA5D008A014B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-smack/Pods-smack-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6582f2f3ba714c4b361092b3f4f9a059b25bac64 db565d63a41b3838c30698db678c69676d19669898b8e17eaaa6edfc2b708ee8";
 		};
 		7D89B92EC019D63FEB6A1D8D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -312,9 +314,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-smack/Pods-smack-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -327,13 +342,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-smack-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -503,6 +521,7 @@
 			baseConfigurationReference = 80394E489E6ADA8458E16DF3 /* Pods-smack.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DU44C6AG9P;
@@ -522,6 +541,7 @@
 			baseConfigurationReference = B1B17E8B7050FE0318AAE604 /* Pods-smack.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DU44C6AG9P;

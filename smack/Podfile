@@ -11,5 +11,10 @@ target 'smack' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'Socket.IO-Client-Swift'
-  
+
+#use_frameworks!
+pod 'Fabric'
+pod 'Crashlytics'
+pod 'Firebase/Core'
+
 end
